@@ -29,3 +29,12 @@ SELECT * FROM tb_transaksi_penjualan
 SELECT COUNT(id)/10 AS id FROM barang
 
 SELECT CONCAT(SUM(jumlah_barang),' Pcs') AS jml, CONCAT('Rp. ',FORMAT(SUM(subtotal),0)) AS subtotal FROM tb_transaksi_penjualan
+
+SELECT CONCAT('Rp. ',FORMAT(SUM(jumlah_barang * harga_beli),0)) AS m_awal, 
+CONCAT('Rp. ',FORMAT(SUM(jumlah_barang * harga_jual),0)) AS m_akhir,
+CONCAT('Rp. ',FORMAT(SUM((jumlah_barang * harga_jual) - (jumlah_barang * harga_beli)),0)) AS lab_untung
+FROM tb_barang
+
+SELECT * FROM tb_penjualan LIMIT 0,10
+
+SELECT CONCAT('Rp. ',FORMAT(SUM(harga_jual),0)) AS harga FROM tb_barang

@@ -1,10 +1,10 @@
 <div class="card">
-	<div class="header">
+	<div class="header bg-blue">
 		<h2>Laporan Stok Barang</h2>
 	</div>
 	<div class="body">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-4">
 				<form action="" method="POST">
                     <div class="input-group">
                     <div class="form-line">
@@ -17,7 +17,14 @@
                 </div>        
                 </form>
             </div>
-			<div class="col-lg-6">
+            <div class="col-lg-4">
+            	<?php $modal = mysqli_query($koneksi, "SELECT CONCAT('Rp. ',FORMAT(SUM(jumlah_barang * harga_beli),0)) AS m_awal, CONCAT('Rp. ',FORMAT(SUM(jumlah_barang * harga_jual),0)) AS m_akhir, CONCAT('Rp. ',FORMAT(SUM((jumlah_barang * harga_jual) - (jumlah_barang * harga_beli)),0)) AS lab_untung FROM tb_barang");
+            	 $dtmod = mysqli_fetch_array($modal);?>
+            	<div class="alert bg-light-blue">
+            		<a class="btn bg-black"><h5>SUB Modal : </h5><h3 class=""><?= $dtmod['m_awal']; ?></h3></a>
+            	</div>
+            </div>
+			<div class="col-lg-4">
 				<div class="alert bg-red">
 					<h5>Notification : </h5>
 					<small>Pada baris kolom stok barang akan muncul warna merah jika stok <= 3</small>

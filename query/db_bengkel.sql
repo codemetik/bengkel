@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Sep 2020 pada 06.54
+-- Waktu pembuatan: 15 Sep 2020 pada 10.32
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -142,6 +142,22 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_return`
+--
+
+CREATE TABLE `tb_return` (
+  `id_return` char(15) NOT NULL,
+  `id_transaksi` char(15) NOT NULL,
+  `id_barang` char(15) NOT NULL,
+  `id_user` char(15) NOT NULL,
+  `jumlah_brg_return` int(50) NOT NULL,
+  `harga` int(50) NOT NULL,
+  `subharga` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_roles`
 --
 
@@ -248,6 +264,12 @@ ALTER TABLE `tb_kategori`
 --
 ALTER TABLE `tb_penjualan`
   ADD PRIMARY KEY (`id_penjualan`);
+
+--
+-- Indeks untuk tabel `tb_return`
+--
+ALTER TABLE `tb_return`
+  ADD PRIMARY KEY (`id_return`);
 
 --
 -- Indeks untuk tabel `tb_roles`
