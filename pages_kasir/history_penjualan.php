@@ -38,7 +38,7 @@
 						<tbody>
 						<?php 
 						date_default_timezone_set('Asia/Jakarta');//Menyesuaikan waktu dengan tempat kita tinggal
-						$tgl_saat_ini = date('d-F-Y');//Menampilkan Jam Sekarang
+						$tgl_saat_ini = date('d-F-Y');//Menampilkan Tgl Sekarang
 						if (isset($_POST['search_button'])) {
 							$search = $_POST['search'];
 							$sqltrx = mysqli_query($koneksi, "SELECT id_penjualan, id_transaksi, id_barang, id_user, nama_barang, jumlah_barang, CONCAT('Rp. ',FORMAT(harga,0)) AS harga, CONCAT('Rp. ',FORMAT(subharga,0)) AS subharga, CONCAT('Rp. ',FORMAT(subtotal,0)) AS subtotal, CONCAT('Rp. ',FORMAT(bayar,0)) AS bayar, CONCAT('Rp. ',FORMAT(kembali,0)) AS kembali, tgl_penjualan FROM tb_penjualan WHERE id_penjualan = '".$search."' OR id_transaksi LIKE '%".$search."%' OR id_barang LIKE '%".$search."%' OR id_user LIKE '%".$search."%' OR nama_barang LIKE '%".$search."%' OR tgl_penjualan LIKE '%".$search."%' ORDER BY id_penjualan DESC");

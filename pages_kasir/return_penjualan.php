@@ -23,21 +23,24 @@
 						<thead class="bg-blue">
 							<tr>
 								<th>ID Transaksi</th>
-								<th>ID Barang</th>
-								<th>Nama Barang</th>
-								<th>Jumlah Barang</th>
+								<th>Subtotal</th>
+								<th>TGL Penjualan</th>
 								<th>Return</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
-							$sqlretn = mysqli_query($koneksi, "SELECT * FROM tb_penjualan");
+							<?php
+							if (isset($_POST['search'])) {
+								$search = $_POST['search'];
+								$sqlretn = mysqli_query($koneksi, "SELECT * FROM tb_penjualan WHERE id_transaksi = '".$search."' GROUP BY id_transaksi DESC");
+							}else{
+								$sqlretn = mysqli_query($koneksi, "SELECT * FROM tb_penjualan GROUP BY id_transaksi DESC");
+							}
 							while ($dt =  mysqli_fetch_array($sqlretn)) { ?>
 								<tr>
 									<td><?= $dt['id_transaksi']; ?></td>
-									<td><?= $dt['id_barang']; ?></td>
-									<td><?= $dt['nama_barang']; ?></td>
-									<td><?= $dt['jumlah_barang']; ?></td>
+									<td><?= $dt['subtotal']; ?></td>
+									<td><?= $dt['tgl_penjualan']; ?></td>
 									<td><a href="" class="btn bg-red">Return</a></td>
 								</tr>
 							<?php }

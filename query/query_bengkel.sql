@@ -38,3 +38,4 @@ FROM tb_barang
 SELECT * FROM tb_penjualan LIMIT 0,10
 
 SELECT CONCAT('Rp. ',FORMAT(SUM(harga_jual),0)) AS harga FROM tb_barang
+
