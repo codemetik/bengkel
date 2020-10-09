@@ -12,7 +12,7 @@ if (!isset($_SESSION['id_user'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <title>E-POS Bengkel Motor</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -160,12 +160,21 @@ crossorigin="anonymous"></script>
         <!-- Right Sidebar -->
         <aside id="rightsidebar" class="right-sidebar">
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">Transaksi</a></li>
                 <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
                     <ul class="demo-choose-skin">
+                        <?php 
+                        $sqlb = mysqli_query($koneksi, "SELECT * FROM tb_penjualan GROUP BY id_penjualan DESC");
+                        while ($dbr = mysqli_fetch_array($sqlb)) { ?>
+                            <li data-theme="red" class="">
+                                <div class="red"></div>
+                                <a href=""><span><?= $dbr['id_penjualan']; ?></span></a>
+                            </li>
+                        <?php }
+                        ?>
                         <li data-theme="red" class="active">
                             <div class="red"></div>
                             <span>Red</span>
@@ -348,14 +357,22 @@ crossorigin="anonymous"></script>
 
 <script type="text/javascript">
     /*Membuat fungsion onkeyup untuk total bayar*/
-    function bayar(){
+    // function bayar(){
 
-        const subtotal = document.getElementById('subtotal').value;
-        const bayar = document.getElementById('bayar').value;
+    //     const subtotal = document.getElementById('subtotal').value;
+    //     const bayar = document.getElementById('bayar').value;
 
-        const hasil = parseInt(bayar) - parseInt(subtotal);
+    //     const hasil = parseInt(bayar) - parseInt(subtotal);
 
-        document.getElementById('kembali').value = parseInt(hasil);
+    //     document.getElementById('kembali').value = parseInt(hasil);
+    // }
+
+    function keyjum(){
+        var subtotal = document.getElementById('subtotal').value;
+        var bayar = document.getElementById('bayar').value;
+        var hasl = parseInt(bayar) - parseInt(subtotal);
+
+        document.getElementById('kembali').value = hasl;
     }
 </script>
 
@@ -413,6 +430,27 @@ $('#timestamp').html(data);
         </div>
     </div>
 
+
+<!-- Large Size -->
+            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <form action="proses/proses_return.php" method="POST">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="largeModalLabel">Return Barang</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="fetch-data"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="simpan" onclick="return confirm('Apakah Anda yakin ingin mereturn barang ini?')" class="btn bg-blue">Simpan</button>
+                            <button type="button" class="btn bg-red" data-dismiss="modal">Cencel</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
@@ -425,6 +463,21 @@ $('#timestamp').html(data);
                 data :  'rowid='+ rowid,
                 success : function(data){
                 $('.fetched-data').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
+
+    $(document).ready(function(){
+        $('#largeModal').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'modal_ajax/return.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetch-data').html(data);//menampilkan data ke dalam modal
                 }
             });
          });

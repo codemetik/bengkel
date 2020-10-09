@@ -4,7 +4,7 @@
 	</div>
 	<div class="body">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-4">
 				<form action="" method="POST">
                     <div class="input-group">
                     <div class="form-line">
@@ -17,7 +17,7 @@
                 </div>        
                 </form>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-12">
 				<div class="table-responsive">
 					<table class="table table-hover table-bordered">
 						<thead class="bg-blue">
@@ -41,7 +41,7 @@
 									<td><?= $dt['id_transaksi']; ?></td>
 									<td><?= $dt['subtotal']; ?></td>
 									<td><?= $dt['tgl_penjualan']; ?></td>
-									<td><a href="" class="btn bg-red">Return</a></td>
+									<td><a href='#largeModal' id='custId' data-toggle='modal' data-id="<?= $dt['id_transaksi'] ?>" class="btn bg-red">Return</a></td>
 								</tr>
 							<?php }
 							?>
@@ -52,3 +52,4 @@
 		</div>
 	</div>
 </div>
+

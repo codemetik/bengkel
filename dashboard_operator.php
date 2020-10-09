@@ -1,5 +1,7 @@
 <?php 
 session_start();
+include "koneksi.php";
+include "pages_o/query.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +10,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <title>E-POS Bengkel Motor</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -33,6 +35,10 @@ session_start();
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/themes/all-themes.css" rel="stylesheet" />
+    <!-- Dropzone Css -->
+    <link href="plugins/dropzone/dropzone.css" rel="stylesheet">
+    <!-- Bootstrap Select Css -->
+    <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
     <script
 src="https://code.jquery.com/jquery-2.2.4.min.js"
 integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -77,7 +83,7 @@ crossorigin="anonymous"></script>
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">E-POS Bengkel Motor</a>
+                <a class="navbar-brand" href="?page=home">E-POS Bengkel Motor</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -98,7 +104,7 @@ crossorigin="anonymous"></script>
             <div class="menu">
                 <ul class="list">
                     <li class="active">
-                        <a href="index.html">
+                        <a href="?page=home">
                             <i class="material-icons">store</i>
                             <span id="timestamp" class="col-red"></span>
                         </a>
@@ -106,14 +112,34 @@ crossorigin="anonymous"></script>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons"></i>
-                            <span>Transaksi</span>
+                            <span>Data Barang</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="pages/forms/basic-form-elements.html">Basic Form Elements</a>
+                                <a href="?page=detail_barang">Detail Barang</a>
                             </li>
                             <li>
-                                <a href="pages/forms/advanced-form-elements.html">Advanced Form Elements</a>
+                                <a href="?page=cetak_barcode">Cetak barcode</a>
+                            </li>
+                            <li>
+                                <a href="?page=lihat_supplier_kategori">Lihat Supplier dan Kategori</a>
+                            </li>
+                            <li>
+                                <a href="?page=tambah_barang">Tambah Barang</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons"></i>
+                            <span>Input Data</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?page=tambah_supplier">Tambah Supplier</a>
+                            </li>
+                            <li>
+                                <a href="?page=tambah_kategori">Tambah Kategori</a>
                             </li>
                         </ul>
                     </li>
@@ -124,10 +150,19 @@ crossorigin="anonymous"></script>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="pages/forms/basic-form-elements.html">Basic Form Elements</a>
+                                <a href="?page=stok_barang">Stok Barang</a>
                             </li>
                             <li>
-                                <a href="pages/forms/advanced-form-elements.html">Advanced Form Elements</a>
+                                <a href="?page=penjualan">Penjualan</a>
+                            </li>
+                            <li>
+                                <a href="?page=penjualan_harian">Penjualan Harian</a>
+                            </li>
+                            <li>
+                                <a href="?page=penjualan_bulanan">Penjualan Bulanan</a>
+                            </li>
+                            <li>
+                                <a href="?page=penjualan_bulanan">Penjualan Tahunan</a>
                             </li>
                         </ul>
                     </li>
@@ -296,13 +331,60 @@ crossorigin="anonymous"></script>
 
     <section class="content">
         <div class="container-fluid">
-            <div class="block-header">
-                <ol class="breadcrumb breadcrumb-bg-grey">
-                    <li><a href="javascript:void(0);">Dashboard</a></li>
-                    <li class="active">Operator : <?= $_SESSION['nama_user']; ?></li>
-                </ol>
+            <!-- Disini -->
+        <?php 
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            switch ($page) {
+                case 'home':
+                    include "pages_o/home.php";
+                    break;
+                case 'detail_barang':
+                    include "pages_o/operator/data_barang/detail_barang.php";
+                    break;
+                case 'cetak_barcode':
+                    include "pages_o/operator/data_barang/cetak_barcode.php";
+                    break;
+                case 'lihat_supplier_kategori':
+                    include "pages_o/operator/data_barang/lihat_supplier_kategori.php";
+                    break;
+                case 'tambah_barang':
+                    include "pages_o/operator/data_barang/tambah_barang.php";
+                    break;
+                case 'update_barang':
+                    include "pages_o/operator/data_barang/update_barang.php";
+                    break;
+                case 'tambah_supplier':
+                    include "pages_o/operator/input_data/tambah_supplier.php";
+                    break;
+                case 'tambah_kategori':
+                    include "pages_o/operator/input_data/tambah_kategori.php";
+                    break;
+                case 'stok_barang':
+                    include "pages_o/operator/laporan/stok_barang.php";
+                    break;
+                case 'penjualan':
+                    include "pages_o/operator/laporan/penjualan.php";
+                    break;
+                case 'penjualan_harian':
+                    include "pages_o/operator/laporan/penjualan_harian.php";
+                    break;
+                case 'penjualan_bulanan':
+                    include "pages_o/operator/laporan/penjualan_bulanan.php";
+                    break;
+                case 'penjualan_tahunan':
+                    include "pages_o/operator/laporan/penjualan_tahunan.php";
+                    break;
+                
+                default:
+                    include "404.php";
+                    break;
+            }
+        }else{
+            include "pages_o/home.php";
+        }
+        ?>
 
-            </div>
         </div>
     </section>
 

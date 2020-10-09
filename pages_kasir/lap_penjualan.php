@@ -4,20 +4,20 @@
 	</div>
 	<div class="body">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-4">
 				<form action="" method="POST">
                     <div class="input-group">
-                    <div class="form-line">
-                        <input type="text" class="form-control" name="search" placeholder="Search ...">
-                    </div>
-                    <span class="input-group-addon">
-                        <button type="submit" name="search_button" class="btn bg-blue"><i class="material-icons">search</i></button>
-                        <a href="" class="btn bg-blue"><i class="material-icons">refresh</i></a>
-                    </span>
-                </div>        
+	                    <div class="form-line">
+	                        <input type="text" class="form-control" name="search" placeholder="Search ...">
+	                    </div>
+	                    <span class="input-group-addon">
+	                        <button type="submit" name="search_button" class="btn bg-blue"><i class="material-icons">search</i></button>
+	                        <a href="" class="btn bg-blue"><i class="material-icons">refresh</i></a>
+	                    </span>
+	                </div>        
                 </form>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-8">
                 	<div class="alert bg-red">
                 		<h5>Notification : <small>Pilih berdasarkan id transaksi / id user lalu print</small></h5>
                 	</div>

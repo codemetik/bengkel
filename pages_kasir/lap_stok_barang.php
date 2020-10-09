@@ -17,14 +17,7 @@
                 </div>        
                 </form>
             </div>
-            <div class="col-lg-4">
-            	<?php $modal = mysqli_query($koneksi, "SELECT CONCAT('Rp. ',FORMAT(SUM(jumlah_barang * harga_beli),0)) AS m_awal, CONCAT('Rp. ',FORMAT(SUM(jumlah_barang * harga_jual),0)) AS m_akhir, CONCAT('Rp. ',FORMAT(SUM((jumlah_barang * harga_jual) - (jumlah_barang * harga_beli)),0)) AS lab_untung FROM tb_barang");
-            	 $dtmod = mysqli_fetch_array($modal);?>
-            	<div class="alert bg-light-blue">
-            		<a class="btn bg-black"><h5>SUB Modal : </h5><h3 class=""><?= $dtmod['m_awal']; ?></h3></a>
-            	</div>
-            </div>
-			<div class="col-lg-4">
+            <div class="col-lg-8">
 				<div class="alert bg-red">
 					<h5>Notification : </h5>
 					<small>Pada baris kolom stok barang akan muncul warna merah jika stok <= 3</small>
@@ -46,9 +39,9 @@
 							<?php 
 							if (isset($_POST['search_button'])) {
 								$search = $_POST['search'];
-								$sql = mysqli_query($koneksi, "SELECT * FROM tb_barang WHERE id_barang = '".$search."' OR nama_barang LIKE '%".$search."%'");
+								$sql = mysqli_query($koneksi, "SELECT * FROM tb_barang WHERE id_barang = '".$search."' OR nama_barang LIKE '%".$search."%' GROUP BY id_barang DESC");
 							}else{
-								$sql = mysqli_query($koneksi, "SELECT * FROM tb_barang");
+								$sql = mysqli_query($koneksi, "SELECT * FROM tb_barang GROUP BY id_barang DESC");
 							}
 							while ($dt = mysqli_fetch_array($sql)) { ?>
 								<tr>
@@ -56,12 +49,12 @@
 									<td><?= $dt['nama_barang']; ?></td>
 									<?php 
 									if ($dt['jumlah_barang'] <= 3) { ?>
-										<td class="bg-red col-black font-14"><b><?= $dt['jumlah_barang'] ?></b></td>
+										<td class="bg-red col-black font-14"><b><?= $dt['jumlah_barang']; ?></b></td>
 									<?php }else if($dt['jumlah_barang'] >= 3){ ?>
-										<td class="bg-green col-black font-14"><b><?= $dt['jumlah_barang'] ?></b></td>
+										<td class="bg-green col-black font-14"><b><?= $dt['jumlah_barang']; ?></b></td>
 									<?php }
 									?>
-									<td><?= $dt['harga_jual']; ?></td>
+									<td><?= rupiah($dt['harga_jual']); ?></td>
 									<td><?= $dt['keterangan']; ?></td>
 								</tr>
 							<?php }

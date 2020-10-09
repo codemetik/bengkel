@@ -24,6 +24,7 @@ if (isset($_POST['sign'])) {
 			$_SESSION['id_user'] = $users['id_user'];
 			$_SESSION['nama_user'] = $users['nama_user'];
 			$_SESSION['id_jabatan'] = $cekrol['id_jabatan'];
+			$_SESSION['nama_jabatan'] = $dtjbtan['nama_jabatan'];
 			echo "<script>
 			alert('Anda Login sebagai $jb1');
 			document.location.href = 'index.php';
@@ -33,6 +34,7 @@ if (isset($_POST['sign'])) {
 			$_SESSION['id_user'] = $users['id_user'];
 			$_SESSION['nama_user'] = $users['nama_user'];
 			$_SESSION['id_jabatan'] = $cekrol['id_jabatan'];
+			$_SESSION['nama_jabatan'] = $dtjbtan['nama_jabatan'];
 			echo "<script>
 			alert('Anda Login sebagai $jb1');
 			document.location.href = 'dashboard_owner.php';
@@ -42,6 +44,7 @@ if (isset($_POST['sign'])) {
 			$_SESSION['id_user'] = $users['id_user'];
 			$_SESSION['nama_user'] = $users['nama_user'];
 			$_SESSION['id_jabatan'] = $cekrol['id_jabatan'];
+			$_SESSION['nama_jabatan'] = $dtjbtan['nama_jabatan'];
 			echo "<script>
 			alert('Anda Login sebagai $jb1');
 			document.location.href = 'dashboard_operator.php';

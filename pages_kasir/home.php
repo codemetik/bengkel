@@ -110,7 +110,7 @@
                                 <td><input type="text" name="nama_barang[]" class="form-control font-11" value="<?= $dt['nama_barang']; ?>" readonly></td>
                                 <td><input type="text" name="jumlah_barang[]" class="form-control font-11" value="<?= $dt['jumlah_barang']; ?>" readonly></td>
                                 <td><input type="text" name="harga[]" class="form-control font-11" value="<?= $dt['harga']; ?>" readonly></td>
-                                <td><input type="text" name="subharga[]" class="form-control font-11" value="<?= $dt['subharga']; ?>"></td>
+                                <td><input type="text" name="subharga[]" class="form-control font-11" value="<?= $dt['subharga']; ?>" readonly></td>
                                 <td><a href="proses/proses_delete_trx.php?id=<?= $dt['id_penjualan']; ?>&idus=<?= $_SESSION['id_user']; ?>" class="btn bg-red"><i class="material-icons">delete_forever</i></a></td>
                             </tr>
                         <?php }
@@ -129,7 +129,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="text-right bg-blue"><b class="col-black">Bayar : </b></td>
-                                <td colspan="4" class="bg-blue"><input type="text" name="bayar" id="bayar" class="form-control col-black" placeholder="Rp."></td>
+                                <td colspan="4" class="bg-blue"><input type="text" onkeyup="keyjum();" name="bayar" id="bayar" class="form-control col-black" placeholder="Rp."></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="text-right bg-blue"><b class="col-black">Kembali : </b></td>
@@ -137,9 +137,9 @@
                             </tr>
                         <!-- </form> -->
                             <tr>
-                                <td colspan="5" class="bg-blue"><button type="submit" class="form-control btn bg-green" name="simpan_trx" onclick="return confirm('Apakah item barang sudah sesuai?')"><i class="material-icons">save</i> Simpan</button></td>
+                                <td colspan="6" class="bg-blue"><button type="submit" class="form-control btn bg-green" name="simpan_trx" onclick="return confirm('Apakah item barang sudah sesuai?')"><i class="material-icons">save</i> Simpan</button></td>
                                 </form>
-                                <td><button type="submit" name="hasil" id="hasil" class="btn bg-blue"><i class="material-icons" onclick="bayar();">drag_handle</i></button></td>
+                                <!-- <td><button type="submit" name="hasil" id="hasil" class="btn bg-blue"><i class="material-icons" onclick="bayar();">drag_handle</i></button></td> -->
                             </tr>
                         </tbody>
                     </table>

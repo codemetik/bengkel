@@ -39,3 +39,35 @@ SELECT * FROM tb_penjualan LIMIT 0,10
 
 SELECT CONCAT('Rp. ',FORMAT(SUM(harga_jual),0)) AS harga FROM tb_barang
 
+SELECT * FROM tb_penjualan GROUP BY id_transaksi DESC
+
+SELECT * FROM tb_user
+SELECT * FROM tb_roles
+SELECT * FROM tb_jabatan
+SELECT * FROM tb_barang
+SELECT * FROM tb_supplier
+
+SELECT * FROM tb_rols_product
+SELECT * FROM table_all_product
+
+SELECT * FROM tb_return
+
+SELECT * FROM tb_kategori
+SELECT * FROM tb_supplier
+
+SELECT * FROM tb_barang
+SELECT * FROM tb_transaksi_penjualan
+
+SELECT * FROM tb_penjualan WHERE id_transaksi = 'TRX0000001'
+
+SELECT * FROM tb_roles_kategori
+SELECT * FROM tb_roles_supplier
+
+SELECT COUNT(*) FROM tb_barang
+SELECT COUNT(*) FROM tb_penjualan
+
+SELECT y.id_barang, x.jumlah_barang AS brg, harga_beli, harga_jual, x.jumlah_barang * harga_beli AS Hbeli
+FROM tb_penjualan X
+INNER JOIN tb_barang Y ON y.id_barang = x.id_barang
+
+y.jumlah_barang AS pnj,
