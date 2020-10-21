@@ -1,6 +1,6 @@
 <div class="block-header">
     <ol class="breadcrumb breadcrumb-bg-blue">
-        <li><a href="javascript:void(0);">Data Barang</a></li>
+        <li><a href="javascript:void(0);">Data Terkait</a></li>
         <li class="active">Lihat Supplier dan Kategori</li>
     </ol>
 </div>

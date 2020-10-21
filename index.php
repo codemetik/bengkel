@@ -1,5 +1,6 @@
 ﻿<?php 
 session_start();
+date_default_timezone_set('Asia/Jakarta');
 include "koneksi.php";
 if (!isset($_SESSION['id_user'])) {
     header("location:sign_in.php");
@@ -14,7 +15,7 @@ if (!isset($_SESSION['id_user'])) {
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>E-POS Bengkel Motor</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/logo_em.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -98,49 +99,52 @@ crossorigin="anonymous"></script>
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
+        <aside id="leftsidebar" class="sidebar bg-blue-grey">
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
                     <li class="active">
                         <a href="index.php">
-                            <i class="material-icons">store</i>
-                            <span id="timestamp" class="col-red"></span>
+                            <i class="material-icons col-deep-orange">store</i>
+                            <span id="timestamp" class="col-deep-orange"></span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="bg-blue">
                             <i class="material-icons"></i>
-                            <span>Transaksi</span>
+                            <span class="col-white">Transaksi</span>
                         </a>
                         <ul type="disc">
                             <li>
-                                <a href="?page=home">Transaksi Penjualan</a>
+                                <a href="?page=home" class="col-white">Transaksi Penjualan</a>
                             </li>
                             <li>
-                                <a href="?page=history_penjualan">History Penjualan</a>
+                                <a href="?page=history_penjualan" class="col-white">History Penjualan</a>
                             </li>
                             <li>
-                                <a href="?page=return_penjualan">Return Penjualan</a>
+                                <a href="?page=return_penjualan" class="col-white">Return Penjualan</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="bg-blue">
                             <i class="material-icons"></i>
-                            <span>Laporan</span>
+                            <span class="col-white">Laporan</span>
                         </a>
                         <ul type="disc">
                             <li>
-                                <a href="?page=lap_penjualan">Lap. Penjualan</a>
+                                <a href="?page=lap_penjualan" class="col-white">Lap. Penjualan</a>
                             </li>
                             <li>
-                                <a href="?page=lap_stok_barang">Lap. Stok Barang</a>
+                                <a href="?page=return" class="col-white">Lap. Return Barang</a>
+                            </li>
+                            <li>
+                                <a href="?page=lap_stok_barang" class="col-white">Lap. Stok Barang</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="logout.php" class="btn bg-red"><span>Logout</span></a>
+                        <a href="logout.php" class="btn bg-deep-orange"><span class="col-white">Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -343,13 +347,16 @@ crossorigin="anonymous"></script>
                 case 'lap_stok_barang':
                     include "pages_kasir/lap_stok_barang.php";
                     break;
+                case 'return':
+                    include "laporan_return_.php";
+                    break;
                 
                 default:
                     include "404.php";
                     break;
             }
         }else{
-            include "pages_kasir/home.php";
+            include "pages_kasir/visimis.php";
         }
         ?>
         </div>

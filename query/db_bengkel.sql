@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Okt 2020 pada 14.58
+-- Waktu pembuatan: 21 Okt 2020 pada 03.58
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Stand-in struktur untuk tampilan `table_barang`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `table_barang` (
+`id_barang` char(15)
+,`nama_barang` varchar(100)
+,`warna` varchar(15)
+,`jumlah_barang` int(50)
+,`harga_beli` varchar(100)
+,`harga_jual` varchar(100)
+,`keterangan` varchar(100)
+,`tgl_barang` varchar(225)
+,`id_kategori` char(15)
+,`nama_kategori` varchar(25)
+,`id_supplier` char(15)
+,`nama_supplier` varchar(225)
+,`alamat_supplier` varchar(225)
+,`no_telp_supplier` varchar(15)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_barang`
 --
 
@@ -34,25 +57,26 @@ CREATE TABLE `tb_barang` (
   `jumlah_barang` int(50) NOT NULL,
   `harga_beli` varchar(100) NOT NULL,
   `harga_jual` varchar(100) NOT NULL,
-  `keterangan` varchar(100) NOT NULL
+  `keterangan` varchar(100) NOT NULL,
+  `tgl_barang` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tb_barang`
 --
 
-INSERT INTO `tb_barang` (`id_barang`, `nama_barang`, `warna`, `jumlah_barang`, `harga_beli`, `harga_jual`, `keterangan`) VALUES
-('BRG0000001', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 'hitam', 8, '625000', '650000', 'baik'),
-('BRG0000002', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless Nmax Depan Front', 'hitam', 2, '730000', '765000', 'baik'),
-('BRG0000004', ' Ban 4', 'hitam', 3, '320000', '350000', 'baru'),
-('BRG0000005', 'Ban 5', 'hitam', 2, '240000', '300000', 'baru'),
-('BRG0000006', 'Ban 6', 'hitam', 2, '240000', '320000', 'baru'),
-('BRG0000007', 'ban 7', 'hitam', 5, '120000', '130000', 'baru'),
-('BRG0000008', 'Ban 8', 'hitam', 1, '600000', '620000', 'baru'),
-('BRG0000009', 'Ban 9', 'hitam', 3, '300000', '390000', 'baru'),
-('BRG0000010', 'Ban 10', 'hitam', 5, '360000', '400000', 'baru'),
-('BRG0000011', 'Kamvas Rem', 'Hitam', 10, '24000', '35000', 'Baru'),
-('BRG0000012', 'Cakram', 'Metal', 22, '75000', '90000', 'Baik');
+INSERT INTO `tb_barang` (`id_barang`, `nama_barang`, `warna`, `jumlah_barang`, `harga_beli`, `harga_jual`, `keterangan`, `tgl_barang`) VALUES
+('BRG0000001', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 'hitam', 5, '625000', '650000', 'baik', ''),
+('BRG0000002', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless Nmax Depan Front', 'hitam', 2, '730000', '765000', 'baik', ''),
+('BRG0000004', ' Ban 4', 'hitam', 3, '320000', '350000', 'baru', ''),
+('BRG0000005', 'Ban 5', 'hitam', 2, '240000', '300000', 'baru', ''),
+('BRG0000006', 'Ban 6', 'hitam', 2, '240000', '320000', 'baru', ''),
+('BRG0000007', 'ban 7', 'hitam', 5, '120000', '130000', 'baru', ''),
+('BRG0000008', 'Ban 8', 'hitam', 1, '600000', '620000', 'baru', ''),
+('BRG0000009', 'Ban 9', 'hitam', 3, '300000', '390000', 'baru', ''),
+('BRG0000010', 'Ban 10', 'hitam', 5, '360000', '400000', 'baru', ''),
+('BRG0000011', 'Kamvas Rem', 'Hitam', 19, '24000', '35000', 'Bagus', ''),
+('BRG0000012', 'Cakram', 'Hitam Metal', 24, '120000', '160000', 'Bagus dan Baru', '2020-10-10 06:23:17');
 
 -- --------------------------------------------------------
 
@@ -73,6 +97,25 @@ INSERT INTO `tb_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 ('JBT01', 'kasir'),
 ('JBT02', 'Owner'),
 ('JBT03', 'Operator');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_jenis_kelamin`
+--
+
+CREATE TABLE `tb_jenis_kelamin` (
+  `id_jk` int(50) NOT NULL,
+  `jenis_kelamin` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_jenis_kelamin`
+--
+
+INSERT INTO `tb_jenis_kelamin` (`id_jk`, `jenis_kelamin`) VALUES
+(1, 'Laki-laki'),
+(2, 'Perempuan');
 
 -- --------------------------------------------------------
 
@@ -122,26 +165,32 @@ CREATE TABLE `tb_penjualan` (
 --
 
 INSERT INTO `tb_penjualan` (`id_penjualan`, `id_transaksi`, `id_barang`, `id_user`, `nama_barang`, `jumlah_barang`, `harga`, `subharga`, `subtotal`, `bayar`, `kembali`, `tgl_penjualan`) VALUES
-('PNJ0000001', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '13-September-2020 02:20:44'),
-('PNJ0000002', '', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 3, 1950000, 0, 0, 0, 0, '13-September-2020 02:20:44'),
-('PNJ0000003', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '13-September-2020 02:51:42'),
-('PNJ0000004', '', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 4, 2600000, 0, 0, 0, 0, '13-September-2020 02:51:42'),
-('PNJ0000005', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '13-September-2020 02:51:42'),
-('PNJ0000006', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '13-September-2020 03:04:36'),
-('PNJ0000007', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '13-September-2020 13:40:36'),
-('PNJ0000008', '', 'BRG0000004', 'USE0004', 'Ban', 2, 700000, 0, 0, 0, 0, '13-September-2020 14:37:07'),
-('PNJ0000009', 'TRX0000001', 'BRG0000004', 'USE0004', 'Ban', 2, 700000, 0, 0, 0, 0, '13-September-2020 14:51:56'),
-('PNJ0000010', 'TRX0000001', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 4, 3060000, 0, 0, 0, 0, '13-September-2020 14:51:56'),
-('PNJ0000011', 'TRX0000002', 'BRG0000006', 'USE0004', 'Ban', 2, 640000, 0, 0, 0, 0, '13-September-2020 15:07:10'),
-('PNJ0000012', 'TRX0000003', 'BRG0000004', 'USE0004', 'Ban', 2, 7, 0, 0, 0, 0, '14-September-2020 08:32:06'),
-('PNJ0000013', 'TRX0000004', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000, 1530000, 2, 2, 2, '14-September-2020 11:20:58'),
-('PNJ0000014', 'TRX0000004', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 1, 650000, 650000, 1, 2, 0, '14-September-2020 11:20:58'),
-('PNJ0000015', 'TRX0000005', 'BRG0000005', 'USE0004', 'Ban', 4, 300000, 1200000, 1330000, 1500000, 170000, '14-September-2020 11:24:27'),
-('PNJ0000016', 'TRX0000005', 'BRG0000007', 'USE0004', 'ban', 1, 130000, 130000, 1330000, 1500000, 170000, '14-September-2020 11:24:27'),
-('PNJ0000017', 'TRX0000006', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 2, 650000, 1300000, 2065000, 2100000, 35000, '14-September-2020 11:51:22'),
-('PNJ0000018', 'TRX0000006', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 1, 765000, 765000, 2065000, 2100000, 35000, '14-September-2020 11:51:22'),
-('PNJ0000019', 'TRX0000007', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000, 1530000, 1530000, 1600000, 70000, '14-September-2020 12:21:50'),
-('PNJ0000020', 'TRX0000008', 'BRG0000012', 'USE0004', 'Cakram', 2, 90000, 180000, 180000, 200000, 20000, '09-October-2020 13:36:59');
+('PNJ0000001', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '2020-09-13 02:20:44'),
+('PNJ0000002', '', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 3, 1950000, 0, 0, 0, 0, '2020-09-13 02:20:44'),
+('PNJ0000003', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '2020-09-13 02:51:42'),
+('PNJ0000004', '', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 4, 2600000, 0, 0, 0, 0, '2020-09-13 02:51:42'),
+('PNJ0000005', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '2020-09-13 02:51:42'),
+('PNJ0000006', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '2020-09-13 03:04:36'),
+('PNJ0000007', '', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 1530000, 0, 0, 0, 0, '2020-09-13 13:40:36'),
+('PNJ0000008', '', 'BRG0000004', 'USE0004', 'Ban', 2, 700000, 0, 0, 0, 0, '2020-09-13 14:37:07'),
+('PNJ0000009', 'TRX0000001', 'BRG0000004', 'USE0004', 'Ban', 2, 700000, 0, 0, 0, 0, '2020-09-13 14:51:56'),
+('PNJ0000010', 'TRX0000001', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 4, 3060000, 0, 0, 0, 0, '2020-09-13 14:51:56'),
+('PNJ0000011', 'TRX0000002', 'BRG0000006', 'USE0004', 'Ban', 2, 640000, 0, 0, 0, 0, '2020-09-13 15:07:10'),
+('PNJ0000012', 'TRX0000003', 'BRG0000004', 'USE0004', 'Ban', 2, 7, 0, 0, 0, 0, '2020-09-13 08:32:06'),
+('PNJ0000013', 'TRX0000004', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000, 1530000, 2, 2, 2, '2020-09-14 11:20:58'),
+('PNJ0000014', 'TRX0000004', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 1, 650000, 650000, 1, 2, 0, '2020-09-14 11:20:58'),
+('PNJ0000015', 'TRX0000005', 'BRG0000005', 'USE0004', 'Ban', 4, 300000, 1200000, 1330000, 1500000, 170000, '2020-09-14 11:24:27'),
+('PNJ0000016', 'TRX0000005', 'BRG0000007', 'USE0004', 'ban', 1, 130000, 130000, 1330000, 1500000, 170000, '2020-09-14 11:24:27'),
+('PNJ0000017', 'TRX0000006', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 2, 650000, 1300000, 2065000, 2100000, 35000, '2020-09-14 11:51:22'),
+('PNJ0000018', 'TRX0000006', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 1, 765000, 765000, 2065000, 2100000, 35000, '2020-09-14 11:51:22'),
+('PNJ0000019', 'TRX0000007', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000, 1530000, 1530000, 1600000, 70000, '2020-09-14 12:21:50'),
+('PNJ0000020', 'TRX0000008', 'BRG0000012', 'USE0004', 'Cakram', 2, 90000, 180000, 180000, 200000, 20000, '2020-10-09 04:07:05'),
+('PNJ0000021', 'TRX0000009', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 2, 650000, 1300000, 1815000, 2000000, 185000, '2020-10-10 04:07:05'),
+('PNJ0000022', 'TRX0000009', 'BRG0000011', 'USE0004', 'Kamvas Rem', 1, 35000, 35000, 1815000, 2000000, 185000, '2020-10-10 04:07:05'),
+('PNJ0000023', 'TRX0000009', 'BRG0000012', 'USE0004', 'Cakram', 3, 160000, 480000, 1815000, 2000000, 185000, '2019-10-10 04:07:05'),
+('PNJ0000024', 'TRX0000010', 'BRG0000012', 'USE0004', 'Cakram', 4, 160000, 640000, 640000, 650000, 10000, '2019-10-10 04:07:05'),
+('PNJ0000025', 'TRX0000011', 'BRG0000012', 'USE0004', 'Cakram', 1, 160000, 160000, 160000, 200000, 40000, '2020-10-11 02:22:32'),
+('PNJ0000026', 'TRX0000012', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 1, 650000, 650000, 650000, 700000, 50000, '2020-10-20 05:53:57');
 
 --
 -- Trigger `tb_penjualan`
@@ -211,7 +260,8 @@ INSERT INTO `tb_roles` (`id_roles`, `id_user`, `id_jabatan`) VALUES
 ('TOL0003', 'USE0003', 'JBT02'),
 ('TOL0004', 'USE0004', 'JBT01'),
 ('TOL0005', 'USE0005', 'JBT01'),
-('TOL0006', 'USE0006', 'JBT01');
+('TOL0006', 'USE0006', 'JBT01'),
+('TOL0007', 'USE0007', 'JBT01');
 
 -- --------------------------------------------------------
 
@@ -230,8 +280,6 @@ CREATE TABLE `tb_roles_kategori` (
 --
 
 INSERT INTO `tb_roles_kategori` (`id_roles_kategori`, `id_barang`, `id_kategori`) VALUES
-(6, 'BRG0000011', 'KT001'),
-(9, 'BRG0000012', 'KT002'),
 (12, 'BRG0000010', 'KT002'),
 (13, 'BRG0000001', 'KT002'),
 (14, 'BRG0000002', 'KT002'),
@@ -240,7 +288,9 @@ INSERT INTO `tb_roles_kategori` (`id_roles_kategori`, `id_barang`, `id_kategori`
 (17, 'BRG0000006', 'KT003'),
 (18, 'BRG0000007', 'KT004'),
 (19, 'BRG0000008', 'KT002'),
-(20, 'BRG0000009', 'KT004');
+(20, 'BRG0000009', 'KT004'),
+(21, 'BRG0000011', 'KT004'),
+(22, 'BRG0000012', 'KT004');
 
 -- --------------------------------------------------------
 
@@ -259,17 +309,17 @@ CREATE TABLE `tb_roles_supplier` (
 --
 
 INSERT INTO `tb_roles_supplier` (`id_roles_supplier`, `id_barang`, `id_supplier`) VALUES
-(3, 'BRG0000012', 'SPL0000001'),
 (4, 'BRG0000010', 'SPL0000001'),
-(6, 'BRG0000011', 'SPL0000001'),
-(7, 'BRG0000001', 'SPL0000001'),
-(8, 'BRG0000002', 'SPL0000001'),
+(7, 'BRG0000001', 'SPL0000002'),
+(8, 'BRG0000002', 'SPL0000002'),
 (9, 'BRG0000004', 'SPL0000001'),
 (10, 'BRG0000005', 'SPL0000001'),
-(11, 'BRG0000006', 'SPL0000001'),
+(11, 'BRG0000006', 'SPL0000002'),
 (12, 'BRG0000007', 'SPL0000001'),
 (13, 'BRG0000008', 'SPL0000001'),
-(14, 'BRG0000009', 'SPL0000001');
+(14, 'BRG0000009', 'SPL0000002'),
+(15, 'BRG0000011', 'SPL0000002'),
+(16, 'BRG0000012', 'SPL0000001');
 
 -- --------------------------------------------------------
 
@@ -312,8 +362,7 @@ CREATE TABLE `tb_transaksi_penjualan` (
 --
 
 INSERT INTO `tb_transaksi_penjualan` (`id_penjualan`, `id_barang`, `id_user`, `nama_barang`, `jumlah_barang`, `harga`) VALUES
-('TRX0000001', 'BRG0000002', 'USR0001', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 1, 765000),
-('TRX0000002', 'BRG0000001', 'USR0001', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 2, 650000);
+('TRX0000001', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000);
 
 -- --------------------------------------------------------
 
@@ -339,12 +388,22 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `confirm_password`, `nama_user`, `alamat`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `status`) VALUES
-('USE0001', 'admin', 'admin', 'admin', 'Hendra', 'Jakarta', 'Laki-laki', 'Jakarta', '03-12-1996', 'active'),
-('USE0002', 'kasir', 'kasir', 'kasir', 'Ricki', 'Pamulang', 'Laki-laki', 'Jakarta', '02-11-1995', 'non active'),
-('USE0003', 'pemilik', 'pemilik', 'pemilik', 'Andi', 'Tangerang', 'Perempuan', 'Tangerang', '04-10-1990', 'active'),
-('USE0004', 'kasir2020', 'kasir2020', 'kasir2020', 'Diandra', '', '', '', '', 'active'),
-('USE0005', 'retno', 'retno2020', 'retno2020', '', '', '', '', '', 'active'),
-('USE0006', 'kasir1010', 'kasir1010', 'kasir1010', '', '', '', '', '', 'active');
+('USE0001', 'admin', 'admin', 'admin', 'Hendra', 'Jakarta', 'Laki-laki', 'Jakarta', '1996-12-03', 'active'),
+('USE0002', 'kasir', 'kasir', 'kasir', 'Ricki', 'Pamulang', 'Laki-laki', 'Jakarta', '1995-11-02', 'non active'),
+('USE0003', 'pemilik', 'pemilik', 'pemilik', 'Andi', 'Tangerang', 'Perempuan', 'Tangerang', '1990-10-04', 'active'),
+('USE0004', 'kasir2020', 'kasir2020', 'kasir2020', 'Diandra', '', '', '', '1990-10-06', 'active'),
+('USE0005', 'retno', 'retno2020', 'retno2020', '', '', '', '', '1990-10-11', 'active'),
+('USE0006', 'kasir1010', 'kasir1010', 'kasir1010', '', '', '', '', '1990-10-20', 'active'),
+('USE0007', 'dandi', 'dandi', 'dandi', 'dandi', 'jakarta', 'Perempuan', 'jakarta', '2020-10-06', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `table_barang`
+--
+DROP TABLE IF EXISTS `table_barang`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table_barang`  AS  (select `x`.`id_barang` AS `id_barang`,`x`.`nama_barang` AS `nama_barang`,`x`.`warna` AS `warna`,`x`.`jumlah_barang` AS `jumlah_barang`,`x`.`harga_beli` AS `harga_beli`,`x`.`harga_jual` AS `harga_jual`,`x`.`keterangan` AS `keterangan`,`x`.`tgl_barang` AS `tgl_barang`,`y`.`id_kategori` AS `id_kategori`,`a`.`nama_kategori` AS `nama_kategori`,`b`.`id_supplier` AS `id_supplier`,`c`.`nama_supplier` AS `nama_supplier`,`c`.`alamat_supplier` AS `alamat_supplier`,`c`.`no_telp_supplier` AS `no_telp_supplier` from ((((`tb_barang` `x` join `tb_roles_kategori` `y` on(`y`.`id_barang` = `x`.`id_barang`)) join `tb_kategori` `a` on(`a`.`id_kategori` = `y`.`id_kategori`)) join `tb_roles_supplier` `b` on(`b`.`id_barang` = `y`.`id_barang`)) join `tb_supplier` `c` on(`c`.`id_supplier` = `b`.`id_supplier`))) ;
 
 --
 -- Indexes for dumped tables
@@ -361,6 +420,12 @@ ALTER TABLE `tb_barang`
 --
 ALTER TABLE `tb_jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
+
+--
+-- Indeks untuk tabel `tb_jenis_kelamin`
+--
+ALTER TABLE `tb_jenis_kelamin`
+  ADD PRIMARY KEY (`id_jk`);
 
 --
 -- Indeks untuk tabel `tb_kategori`
@@ -427,6 +492,12 @@ ALTER TABLE `tb_user`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_jenis_kelamin`
+--
+ALTER TABLE `tb_jenis_kelamin`
+  MODIFY `id_jk` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_return`
 --
 ALTER TABLE `tb_return`
@@ -436,13 +507,13 @@ ALTER TABLE `tb_return`
 -- AUTO_INCREMENT untuk tabel `tb_roles_kategori`
 --
 ALTER TABLE `tb_roles_kategori`
-  MODIFY `id_roles_kategori` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_roles_kategori` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_roles_supplier`
 --
 ALTER TABLE `tb_roles_supplier`
-  MODIFY `id_roles_supplier` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_roles_supplier` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

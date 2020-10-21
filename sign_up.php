@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Sign Up | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/logo_em.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -63,7 +63,7 @@
                     </div>
 
 
-                    <button class="btn btn-block btn-lg bg-blue waves-effect" type="submit" name="signup">SIGN UP</button>
+                    <button class="btn btn-block btn-lg bg-deep-orange waves-effect" type="submit" name="signup">SIGN UP</button>
 
                     <div class="m-t-25 m-b--5 align-center">
                         <a href="sign_in.php">You already have a membership?</a>

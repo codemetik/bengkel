@@ -12,7 +12,10 @@ if (isset($_POST['simpan'])) {
 	$id_kategori = $_POST['id_kategori'];
 	$id_supplier = $_POST['id_supplier'];
 
-	$insert = mysqli_query($koneksi, "INSERT INTO tb_barang(id_barang, nama_barang, warna, jumlah_barang, harga_beli, harga_jual, keterangan) VALUES('".$id_barang."','".$nama_barang."','".$warna."','".$jml_brg."','".$harga_beli."','".$harga_jual."','".$keterangan."')");
+	date_default_timezone_set('Asia/Jakarta'); 
+	$tgl_barang = date("Y-m-d h:i:s");
+
+	$insert = mysqli_query($koneksi, "INSERT INTO tb_barang(id_barang, nama_barang, warna, jumlah_barang, harga_beli, harga_jual, keterangan,tgl_barang) VALUES('".$id_barang."','".$nama_barang."','".$warna."','".$jml_brg."','".$harga_beli."','".$harga_jual."','".$keterangan."','".$tgl_barang."')");
 
 	$sqlk = mysqli_query($koneksi, "INSERT INTO tb_roles_kategori(id_barang, id_kategori) VALUES('".$id_barang."','".$id_kategori."')");
 	$sqlsp = mysqli_query($koneksi, "INSERT INTO tb_roles_supplier(id_barang, id_supplier) VALUES('".$id_barang."','".$id_supplier."')");

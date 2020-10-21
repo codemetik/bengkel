@@ -1,5 +1,6 @@
 <?php 
 session_start();
+date_default_timezone_set('Asia/Jakarta'); 
 include "koneksi.php";
 include "pages_o/query.php";
 ?>
@@ -12,7 +13,7 @@ include "pages_o/query.php";
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>E-POS Bengkel Motor</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/logo_em.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -99,75 +100,77 @@ crossorigin="anonymous"></script>
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
+        <aside id="leftsidebar" class="sidebar bg-blue-grey">
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
                     <li class="active">
                         <a href="?page=home">
-                            <i class="material-icons">store</i>
-                            <span id="timestamp" class="col-red"></span>
+                            <i class="material-icons col-deep-orange">store</i>
+                            <span id="timestamp" class="col-deep-orange"><?= $_SESSION['nama_jabatan']; ?></span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons"></i>
-                            <span>Data Barang</span>
+                            <span class="col-white">Data Barang</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?page=detail_barang">Detail Barang</a>
+                                <a href="?page=detail_barang" class="col-white">Detail Barang</a>
+                            </li>
+                            
+                            <li>
+                                <a href="?page=lihat_supplier_kategori" class="col-white">Lihat Supplier dan Kategori</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
+                            <i class="material-icons"></i>
+                            <span class="col-white">Input Data</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?page=tambah_barang" class="col-white">Tambah Barang</a>
                             </li>
                             <li>
-                                <a href="?page=cetak_barcode">Cetak barcode</a>
+                                <a href="?page=tambah_supplier" class="col-white">Tambah Supplier</a>
                             </li>
                             <li>
-                                <a href="?page=lihat_supplier_kategori">Lihat Supplier dan Kategori</a>
-                            </li>
-                            <li>
-                                <a href="?page=tambah_barang">Tambah Barang</a>
+                                <a href="?page=tambah_kategori" class="col-white">Tambah Kategori</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons"></i>
-                            <span>Input Data</span>
+                            <span class="col-white">Laporan</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?page=tambah_supplier">Tambah Supplier</a>
+                                <a href="?page=stok_barang" class="col-white">Stok Barang</a>
                             </li>
                             <li>
-                                <a href="?page=tambah_kategori">Tambah Kategori</a>
+                                <a href="?page=penjualan" class="col-white">Penjualan</a>
+                            </li>
+                            <li>
+                                <a href="?page=return" class="col-white">Return Barang</a>
+                            </li>
+                            <li>
+                                <a href="?page=penjualan_harian" class="col-white">Penjualan Harian</a>
+                            </li>
+                            <li>
+                                <a href="?page=penjualan_bulanan" class="col-white">Penjualan Bulanan</a>
+                            </li>
+                            <li>
+                                <a href="?page=penjualan_tahunan" class="col-white">Penjualan Tahunan</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons"></i>
-                            <span>Laporan</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="?page=stok_barang">Stok Barang</a>
-                            </li>
-                            <li>
-                                <a href="?page=penjualan">Penjualan</a>
-                            </li>
-                            <li>
-                                <a href="?page=penjualan_harian">Penjualan Harian</a>
-                            </li>
-                            <li>
-                                <a href="?page=penjualan_bulanan">Penjualan Bulanan</a>
-                            </li>
-                            <li>
-                                <a href="?page=penjualan_bulanan">Penjualan Tahunan</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="logout.php"><span>Logout</span></a>
+                        <a href="logout.php"><span class="col-white">Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -375,6 +378,9 @@ crossorigin="anonymous"></script>
                 case 'penjualan_tahunan':
                     include "pages_o/operator/laporan/penjualan_tahunan.php";
                     break;
+                case 'return':
+                    include "laporan_return_.php";
+                    break;
                 
                 default:
                     include "404.php";
@@ -403,6 +409,44 @@ $('#timestamp').html(data);
 },
 });
 }
+</script>
+
+<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="pages_o/operator/proses/proses_tambah_stok.php" method="POST">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Tambah Stok Barang</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fetched-stok"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn bg-blue" name="simpan" value="Tambah Stok">
+                        <button class="btn bg-red" data-dismiss="modal">Cancel</button>
+                    </div>        
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#myModal').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'modal_ajax/stok_barang.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-stok').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
 </script>
 
     <!-- Jquery Core Js -->

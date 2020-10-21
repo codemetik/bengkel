@@ -1,11 +1,11 @@
 <div class="block-header">
-    <ol class="breadcrumb breadcrumb-bg-grey">
+    <ol class="breadcrumb breadcrumb-bg-blue">
         <li><a href="javascript:void(0);">Data Barang</a></li>
         <li class="active">Tambah Barang</li>
     </ol>
 </div>
 <div class="card">
-	<div class="header bg-blue">
+	<div class="header bg-deep-orange">
 		<h4>Tambah Barang</h4>
 	</div>
 	<div class="body">

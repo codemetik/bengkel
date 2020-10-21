@@ -12,7 +12,7 @@ $idsup=mysqli_query($koneksi, "SELECT * FROM tb_roles_supplier WHERE id_barang =
 $dtsup = mysqli_fetch_array($idsup);
 ?>
 <div class="block-header">
-    <ol class="breadcrumb breadcrumb-bg-grey">
+    <ol class="breadcrumb breadcrumb-bg-blue">
         <li><a href="javascript:void(0);">Data Barang</a></li>
         <li><a href="javascript:void(0);">Detail Barang</a></li>
         <li class="active">Update Barang</li>

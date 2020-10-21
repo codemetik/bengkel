@@ -22,8 +22,11 @@ if (isset($_POST['simpan_trx'])) {
 	$bayar = $_POST['bayar'];
 	$kembali = $_POST['kembali'];
 
-	date_default_timezone_set('Asia/Jakarta');//Menyesuaikan waktu dengan tempat kita tinggal
-	$tgl_penjualan = date('d-F-Y H:i:s');//Menampilkan Jam Sekarang
+	// date_default_timezone_set('Asia/Jakarta');//Menyesuaikan waktu dengan tempat kita tinggal
+	// $tgl_penjualan = date('d-F-Y H:i:s');//Menampilkan Jam Sekarang
+
+	date_default_timezone_set('Asia/Jakarta'); 
+	$tgl_penjualan = date("Y-m-d h:i:s");
 
 	$count = count($nama_barang);
 

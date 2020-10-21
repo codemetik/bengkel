@@ -1,12 +1,12 @@
 <div class="block-header">
-    <ol class="breadcrumb breadcrumb-bg-grey">
+    <ol class="breadcrumb breadcrumb-bg-blue">
         <li><a href="javascript:void(0);">Input Data</a></li>
         <li class="active">Tambah Kategori</li>
     </ol>
 </div>
 <div class="card">
-	<div class="header bg-blue">
-		<h4>Tambah Supplier</h4>
+	<div class="header bg-deep-orange">
+		<h4>Tambah Kategori</h4>
 	</div>
 	<div class="body">
 		<form action="pages_o/operator/proses/proses_input_kategori.php" method="POST">

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+date_default_timezone_set('Asia/Jakarta');
 include "koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ include "koneksi.php";
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>E-POS Bengkel Motor</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/logo_em.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -34,6 +35,9 @@ include "koneksi.php";
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/themes/all-themes.css" rel="stylesheet" />
+    <link href="plugins/dropzone/dropzone.css" rel="stylesheet">
+    <!-- Bootstrap Select Css -->
+    <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
     <script
 src="https://code.jquery.com/jquery-2.2.4.min.js"
 integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -94,89 +98,83 @@ crossorigin="anonymous"></script>
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
+        <aside id="leftsidebar" class="sidebar bg-blue-grey">
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
                     <li class="active">
                         <a href="?page=home">
-                            <i class="material-icons">store</i>
-                            <span id="timestamp" class="col-red"></span>
+                            <i class="material-icons col-deep-orange">store</i>
+                            <span id="timestamp" class="col-deep-orange"><?= $_SESSION['nama_jabatan']; ?></span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons"></i>
-                            <span>Data Barang</span>
+                            <span class="col-white">Data Barang</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?page=detail_barang">Detail barang</a>
-                            </li>
-                            <li>
-                                <a href="?page=cetak_barcode">Cetak barkocode</a>
-                            </li>
-                            <li>
-                                <a href="?page=lihat_supplier">Lihat Supplier</a>
+                                <a href="?page=detail_barang" class="col-white">Detail barang</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons"></i>
-                            <span>Data Supplier</span>
+                            <span class="col-white">Data Terkait</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?page=tambah_supplier">Tambah Supplier</a>
+                                <a href="?page=supplier_kategori" class="col-white">Supplier & kategori</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons"></i>
-                            <span>Laporan</span>
+                            <span class="col-white">Laporan</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?page=laporan">Laporan</a>
+                                <a href="?page=stok_barang" class="col-white">Stok Barang</a>
                             </li>
                             <li>
-                                <a href="?page=stok_barang">Stok Barang</a>
+                                <a href="?page=penjualan" class="col-white">Penjualan</a>
                             </li>
                             <li>
-                                <a href="?page=penjualan">Penjualan</a>
+                                <a href="?page=return" class="col-white">Return Barang</a>
                             </li>
                             <li>
-                                <a href="?page=penjualan_harian">Penjualan Hariah</a>
+                                <a href="?page=penjualan_harian" class="col-white">Penjualan Hariah</a>
                             </li>
                             <li>
-                                <a href="?page=penjualan_bulanan">Penjualan Bulanan</a>
+                                <a href="?page=penjualan_bulanan" class="col-white">Penjualan Bulanan</a>
                             </li>
                             <li>
-                                <a href="?page=penjualan_tahunan">Penjualan Tahunan</a>
+                                <a href="?page=penjualan_tahunan" class="col-white">Penjualan Tahunan</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons"></i>
-                            <span>Menu User</span>
+                            <span class="col-white">Menu User</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?page=data_user">Data User</a>
+                                <a href="?page=data_user" class="col-white">Data User</a>
                             </li>
+                            <!-- <li>
+                                <a href="?page=detail_data_user" class="col-white">Detail Data User</a>
+                            </li> -->
                             <li>
-                                <a href="?page=detail_data_user">Detail Data User</a>
-                            </li>
-                            <li>
-                                <a href="?page=tambah_user">Tambah User</a>
+                                <a href="?page=tambah_user" class="col-white">Tambah User</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="logout.php"><span>Logout</span></a>
+                        <a href="logout.php"><span class="col-white">Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -351,17 +349,8 @@ crossorigin="anonymous"></script>
                 case 'detail_barang':
                     include "pages_o/owner/data_barang/detail_barang.php";
                     break;
-                case 'cetak_barcode':
-                    include "pages_o/owner/data_barang/cetak_barcode.php";
-                    break;
-                case 'lihat_supplier':
-                    include "pages_o/owner/data_barang/lihat_supplier.php";
-                    break;
-                case 'tambah_barang':
-                    include "pages_o/owner/data_supplier/tambah_barang.php";
-                    break;
-                case 'tambah_supplier':
-                    include "pages_o/owner/data_supplier/tambah_supplier.php";
+                case 'supplier_kategori':
+                    include "pages_o/owner/data_terkait/supplier_kategori.php";
                     break;
                 case 'laporan':
                     include "pages_o/owner/laporan/laporan.php";
@@ -389,6 +378,9 @@ crossorigin="anonymous"></script>
                     break;
                 case 'tambah_user':
                     include "pages_o/owner/menu_user/tambah_user.php";
+                    break;
+                case 'return':
+                    include "laporan_return_.php";
                     break;
                 
                 default:

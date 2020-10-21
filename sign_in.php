@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Sign In | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/logo_em.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
                             
                         </div>
                         <div class="col-xs-4">
-                            <button class="btn btn-block bg-blue waves-effect" type="submit" name="sign">SIGN IN</button>
+                            <button class="btn btn-block bg-deep-orange waves-effect" type="submit" name="sign">SIGN IN</button>
                         </div>
                     </div>
                     <div class="row m-t-15 m-b--20">

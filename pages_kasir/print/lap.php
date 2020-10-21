@@ -4,9 +4,9 @@ include "../../koneksi.php";
 if (isset($_GET['idtrx'])) {
 
 $pdf = new PDF_MC_Table('P','mm','A4');
-$pdf->setTitle('E-POS BENGEK MOTOR');
+$pdf->setTitle('E-POS BENGEL MOTOR');
 $pdf->AddPage();
-$pdf->Image('../../images/user-lg.jpg',20,20,30);
+$pdf->Image('../../images/logo_em.png',20,20,30);
 
 $sqlpen = mysqli_query($koneksi, "SELECT id_penjualan, id_transaksi, id_barang, x.id_user, nama_user, nama_barang, jumlah_barang,
 CONCAT('Rp. ',FORMAT(harga,0)) AS harga, CONCAT('Rp. ',FORMAT(subharga,0)) AS subharga, CONCAT('Rp. ',FORMAT(subtotal,0)) AS subtotal,
