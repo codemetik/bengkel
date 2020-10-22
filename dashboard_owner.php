@@ -194,140 +194,60 @@ crossorigin="anonymous"></script>
         <!-- Right Sidebar -->
         <aside id="rightsidebar" class="right-sidebar">
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">Lap. Keranjang</a></li>
                 <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
                     <ul class="demo-choose-skin">
-                        <li data-theme="red" class="active">
-                            <div class="red"></div>
-                            <span>Red</span>
-                        </li>
-                        <li data-theme="pink">
-                            <div class="pink"></div>
-                            <span>Pink</span>
-                        </li>
-                        <li data-theme="purple">
-                            <div class="purple"></div>
-                            <span>Purple</span>
-                        </li>
-                        <li data-theme="deep-purple">
-                            <div class="deep-purple"></div>
-                            <span>Deep Purple</span>
-                        </li>
-                        <li data-theme="indigo">
-                            <div class="indigo"></div>
-                            <span>Indigo</span>
-                        </li>
-                        <li data-theme="blue">
-                            <div class="blue"></div>
-                            <span>Blue</span>
-                        </li>
-                        <li data-theme="light-blue">
-                            <div class="light-blue"></div>
-                            <span>Light Blue</span>
-                        </li>
-                        <li data-theme="cyan">
-                            <div class="cyan"></div>
-                            <span>Cyan</span>
-                        </li>
-                        <li data-theme="teal">
-                            <div class="teal"></div>
-                            <span>Teal</span>
-                        </li>
-                        <li data-theme="green">
-                            <div class="green"></div>
-                            <span>Green</span>
-                        </li>
-                        <li data-theme="light-green">
-                            <div class="light-green"></div>
-                            <span>Light Green</span>
-                        </li>
-                        <li data-theme="lime">
-                            <div class="lime"></div>
-                            <span>Lime</span>
-                        </li>
-                        <li data-theme="yellow">
-                            <div class="yellow"></div>
-                            <span>Yellow</span>
-                        </li>
-                        <li data-theme="amber">
-                            <div class="amber"></div>
-                            <span>Amber</span>
-                        </li>
-                        <li data-theme="orange">
-                            <div class="orange"></div>
-                            <span>Orange</span>
-                        </li>
-                        <li data-theme="deep-orange">
-                            <div class="deep-orange"></div>
-                            <span>Deep Orange</span>
-                        </li>
-                        <li data-theme="brown">
-                            <div class="brown"></div>
-                            <span>Brown</span>
-                        </li>
-                        <li data-theme="grey">
-                            <div class="grey"></div>
-                            <span>Grey</span>
-                        </li>
-                        <li data-theme="blue-grey">
-                            <div class="blue-grey"></div>
-                            <span>Blue Grey</span>
-                        </li>
-                        <li data-theme="black">
-                            <div class="black"></div>
-                            <span>Black</span>
-                        </li>
+                        <?php 
+                        $sqlb = mysqli_query($koneksi, "SELECT * FROM tb_transaksi_penjualan GROUP BY id_penjualan DESC");
+                        while ($dbr = mysqli_fetch_array($sqlb)) { ?>
+                            <li data-theme="red" class="">
+                                <div class="red"></div>
+                                <a href=""><span><?= $dbr['id_barang'].", ".$dbr['nama_barang'].", ".$dbr['jumlah_barang']; ?></span></a>
+                            </li>
+                        <?php }
+                        ?>
                     </ul>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="settings">
                     <div class="demo-settings">
-                        <p>GENERAL SETTINGS</p>
+                        <p>PROFILE</p>
                         <ul class="setting-list">
-                            <li>
-                                <span>Report Panel Usage</span>
-                                <div class="switch">
-                                    <label><input type="checkbox" checked><span class="lever"></span></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>Email Redirect</span>
-                                <div class="switch">
-                                    <label><input type="checkbox"><span class="lever"></span></label>
-                                </div>
-                            </li>
-                        </ul>
-                        <p>SYSTEM SETTINGS</p>
-                        <ul class="setting-list">
-                            <li>
-                                <span>Notifications</span>
-                                <div class="switch">
-                                    <label><input type="checkbox" checked><span class="lever"></span></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>Auto Updates</span>
-                                <div class="switch">
-                                    <label><input type="checkbox" checked><span class="lever"></span></label>
-                                </div>
-                            </li>
-                        </ul>
-                        <p>ACCOUNT SETTINGS</p>
-                        <ul class="setting-list">
-                            <li>
-                                <span>Offline</span>
-                                <div class="switch">
-                                    <label><input type="checkbox"><span class="lever"></span></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>Location Permission</span>
-                                <div class="switch">
-                                    <label><input type="checkbox" checked><span class="lever"></span></label>
-                                </div>
-                            </li>
+                        <?php 
+                        $sqluser = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user = '".$_SESSION['id_user']."'");
+                        $user = mysqli_fetch_array($sqluser); ?>
+                    <form action="proses_update_user.php" method="POST">
+                        <li hidden>
+                            <span>ID User</span>
+                            <input type="text" name="id_user" class="form-control" value="<?= $user['id_user']; ?>" readonly>
+                        </li>
+                        <li>
+                            <span>Username</span>
+                            <input type="text" name="username" class="form-control" value="<?= $user['username']; ?>" readonly>
+                        </li>
+                        <li>
+                            <span>Password</span>
+                            <input type="text" name="password" class="form-control" value="<?= $user['password']; ?>" readonly>
+                        </li>
+                        <li>
+                            <span>Confirm Password</span>
+                            <input type="text" name="confirm_password" class="form-control" value="<?= $user['confirm_password']; ?>" readonly>
+                        </li>
+                        <li><span>Nama User</span>
+                            <input type="text" name="nama_user" class="form-control" value="<?= $user['nama_user']; ?>">
+                        </li>
+                        <li><span>Tempat Lahir</span>
+                            <input type="text" name="tempat_lahir" class="form-control" value="<?= $user['tempat_lahir']; ?>">
+                        </li>
+                        <li><span>Tanggal Lahir</span>
+                            <input type="date" name="tanggal_lahir" class="form-control" value="<?= $user['tanggal_lahir']; ?>">
+                        </li>
+                        <li>
+                            <button type="submit" name="simpan" class="btn bg-blue"><i class="material-icons">save</i> Simpan Perubahan</button>
+                        </li>
+                    </form>
                         </ul>
                     </div>
                 </div>
