@@ -20,11 +20,11 @@ if (isset($_POST['simpan'])) {
 
 	$sqltrx = mysqli_query($koneksi,"INSERT INTO tb_transaksi_penjualan(id_penjualan, id_barang, id_user,nama_barang, jumlah_barang, harga) VALUES('$id_trxp','$id_barang','$id_user','$nama_barang','$jml','$harga')");
 	if ($sqltrx) {
-		header("location:../index.php");
+		header("location:../?page=home");
 	}else{
 		echo "<script>
 		alert('Maaf');
-		document.location.href = '../index.php';
+		document.location.href = '../?page=home';
 		</script>";
 	}
 
