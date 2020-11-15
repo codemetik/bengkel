@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Okt 2020 pada 03.58
+-- Waktu pembuatan: 15 Nov 2020 pada 08.48
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -362,7 +362,9 @@ CREATE TABLE `tb_transaksi_penjualan` (
 --
 
 INSERT INTO `tb_transaksi_penjualan` (`id_penjualan`, `id_barang`, `id_user`, `nama_barang`, `jumlah_barang`, `harga`) VALUES
-('TRX0000001', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000);
+('TRX0000001', 'BRG0000002', 'USE0004', 'Ban Bridgestone Battlax 120/70-13 SC Bias Tubeless', 2, 765000),
+('TRX0000002', 'BRG0000006', 'USE0004', 'Ban 6', 1, 320000),
+('TRX0000003', 'BRG0000001', 'USE0004', 'Ban Battlax Bridgestone 90/90-18 BT 46 F', 1, 650000);
 
 -- --------------------------------------------------------
 
@@ -388,10 +390,10 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `confirm_password`, `nama_user`, `alamat`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `status`) VALUES
-('USE0001', 'admin', 'admin', 'admin', 'Hendra', 'Jakarta', 'Laki-laki', 'Jakarta', '1996-12-03', 'active'),
+('USE0001', 'admin', 'admin', 'admin', 'Hendra', 'Jakarta', 'Laki-laki', 'Bandung selatan', '1996-12-03', 'active'),
 ('USE0002', 'kasir', 'kasir', 'kasir', 'Ricki', 'Pamulang', 'Laki-laki', 'Jakarta', '1995-11-02', 'non active'),
 ('USE0003', 'pemilik', 'pemilik', 'pemilik', 'Andi', 'Tangerang', 'Perempuan', 'Tangerang', '1990-10-04', 'active'),
-('USE0004', 'kasir2020', 'kasir2020', 'kasir2020', 'Diandra', '', '', '', '1990-10-06', 'active'),
+('USE0004', 'kasir2020', 'kasir2020', 'kasir2020', 'Diandra', '', '', 'Jakarta', '1990-10-06', 'active'),
 ('USE0005', 'retno', 'retno2020', 'retno2020', '', '', '', '', '1990-10-11', 'active'),
 ('USE0006', 'kasir1010', 'kasir1010', 'kasir1010', '', '', '', '', '1990-10-20', 'active'),
 ('USE0007', 'dandi', 'dandi', 'dandi', 'dandi', 'jakarta', 'Perempuan', 'jakarta', '2020-10-06', 'Active');
